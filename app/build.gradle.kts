@@ -62,7 +62,8 @@ dependencies {
     implementation(libs.material3)
 
     implementation(libs.coil.compose)
-    implementation(project(":scribble-indicator"))
+//    implementation(project(":scribble-indicator"))
+    implementation(libs.scribble.indicator)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

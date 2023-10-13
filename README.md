@@ -11,11 +11,12 @@ my maven library project
 </p>
 
 ## Download
+[![Maven Central](https://img.shields.io/maven-central/v/com.xuie0000/scribble-indicator.svg?label=Maven%20Central)](https://central.sonatype.com/search?q=com.xuie0000%3Ascribble-indicator&smo=true)
 
-lib is available on `mavenCentral()`.
+available on `mavenCentral()`.
 
 ```groovy
-implementation("com.xuie0000:scribble-indicator:1.0.0")
+implementation("com.xuie0000:scribble-indicator:<version>")
 ```
 
 ## Usage

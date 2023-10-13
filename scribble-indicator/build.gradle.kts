@@ -43,6 +43,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
+
+    publishing {
+        multipleVariants {
+            withJavadocJar()
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
@@ -71,7 +78,6 @@ apply(plugin = "maven-publish")
 apply(plugin = "signing")
 
 val androidSourcesJar = tasks.register("androidSourcesJar", Jar::class.java) {
-    archiveClassifier.set("sources")
     from(android.sourceSets["main"].java.srcDirs)
     from((android.sourceSets["main"].kotlin as DefaultAndroidSourceDirectorySet).srcDirs)
 }
@@ -88,7 +94,6 @@ if (secretPropsFile.exists()) {
     val p = Properties()
     p.load(FileInputStream(secretPropsFile))
     p.entries.forEach {
-        println("key:${it.key} value:${it.value}")
         ext[it.key as String] = it.value
     }
 } else {
@@ -97,6 +102,10 @@ if (secretPropsFile.exists()) {
 
 val prop = Properties().apply {
     load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+}
+
+artifacts {
+    archives(androidSourcesJar)
 }
 
 // Because the components are created only during the afterEvaluate phase, you must
@@ -113,8 +122,6 @@ afterEvaluate {
                 groupId = mavenGroup
                 artifactId = mavenArtifactId
                 version = mavenVersion
-
-                artifact(androidSourcesJar)
 
                 // Self-explanatory metadata for the most part
                 pom {
@@ -185,7 +192,7 @@ signing {
     //
     // Additionally, for users who have gpg instead of gpg2:
     // signing.gnupg.useLegacyGpg=true
-    useGpgCmd()
+//    useGpgCmd()
 
     // Since the publication itself was created in `afterEvaluate`, we must
     // do the same here.

@@ -34,3 +34,5 @@ ScribbleIndicator(
     },
 )
 ```
+
+[效果图](https://github.com/xuie0000/ScribbleIndicator/assets/8099426/5330fc14-76df-4a89-a05d-665f35998bc2)
